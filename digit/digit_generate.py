@@ -4,6 +4,7 @@ Generate a digit PIN number
 """
 
 import random
+import sys
 
 
 def random_num():
@@ -16,13 +17,36 @@ def create_digit_num(digit_num):
     return [random_num() for _ in range(digit_num)]
 
 
-def sample_run():
-    digit_4 = create_digit_num(4)
-    print(digit_4)
+def continue_run(digit_num):
+    while True:
+        print('continue "Enter", or "(Q)uit"')
+        choice = input().upper()
+        if choice == 'Q' or choice == 'QUIT':
+            print('Thanks!')
+            sys.exit()
+        if choice == '':
+            run(digit_num)
+        if not choice.isdecimal():
+            continue  # If the player didn't enter a number, ask again.
 
-    digit_6 = create_digit_num(6)
-    print(digit_6)
+
+def run(digit_num):
+    digit = create_digit_num(digit_num)
+    print(str(digit) + '\n')
+    continue_run(digit_num)
+
+
+def main():
+    print(''' Generate any number of digits.
+    ''')
+
+    while True:
+        print('Enter the number of digits to generate.')
+        digit_num = input()
+        if not digit_num.isdecimal():
+            continue
+        run(int(digit_num))
 
 
 if __name__ == "__main__":
-    sample_run()
+    main()
